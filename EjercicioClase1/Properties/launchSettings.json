@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "EjercicioClase1": {
+      "commandName": "Project",
+      "sqlDebugging": true
+    }
+  }
+}
