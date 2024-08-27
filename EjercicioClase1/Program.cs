@@ -1,4 +1,5 @@
 using EjercicioClase1.Formularios;
+using RegistroDeUsuarios.Formularios;
 
 namespace EjercicioClase1
 {
@@ -13,7 +14,7 @@ namespace EjercicioClase1
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new ObtenerRegistros());
+            Application.Run(new Inicio());
         }
     }
 }

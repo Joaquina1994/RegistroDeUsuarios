@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace EjercicioClase1.Formularios
 {
-    public partial class VentanaPrincipal : Form
+    public partial class Alta : Form
     {
         Usuario usuario = new Usuario();
-        public VentanaPrincipal()
+        public Alta()
         {
             InitializeComponent();
 
@@ -27,24 +27,23 @@ namespace EjercicioClase1.Formularios
                 comboBoxRol.Items.Add(rol);
             }
         }
-
-
+       
         private void btngGuardar_Click(object sender, EventArgs e)
         {
             try
             {
-                
+
                 if (string.IsNullOrEmpty(txtNombre.Text) ||
                     string.IsNullOrEmpty(txtApellido.Text) ||
                     string.IsNullOrEmpty(txtEmail.Text))
                 {
                     throw new Exception("Verifique que todos los campos estén completos.");
                 }
-                if(numericEdad.Value == 0)
+                if (numericEdad.Value == 0)
                 {
                     throw new Exception("Ingrese una edad correcta.");
                 }
-                if(comboBoxRol.SelectedIndex == -1)
+                if (comboBoxRol.SelectedIndex == -1)
                 {
                     throw new Exception("Debe seleccionar un rol de usuario.");
                 }
@@ -53,40 +52,24 @@ namespace EjercicioClase1.Formularios
                     throw new Exception("Ingresar número de teléfono.");
                 }
 
-                else
+                Usuario usuario1 = new Usuario()
                 {
-                    usuario.Nombre = txtNombre.Text;
-                    usuario.Apellido = txtApellido.Text;
-                    usuario.Edad = numericEdad.Value;
-                    usuario.FechaDeNacimiento = dateTimeFechaNac.Value;
-                    usuario.Email = txtEmail.Text;
-                    usuario.Telefono = txtTelefono.Text;
-                    usuario.IdRol = comboBoxRol.SelectedIndex;
+                    Nombre = txtNombre.Text,
+                    Apellido = txtApellido.Text,
+                    Edad = numericEdad.Value,
+                    FechaDeNacimiento = dateTimeFechaNac.Value,
+                    Email = txtEmail.Text,
+                    Telefono = txtTelefono.Text,
+                    IdRol = comboBoxRol.SelectedIndex,
+                };
 
-                    
-                    /*if (string.IsNullOrEmpty(txtTelefono.Text))
-                    {
-                        MessageBox.Show($"DATOS GUARDADOS:\n" +
-                        $"Nombre: {usuario.Nombre}\n" +
-                        $"Apellido: {usuario.Apellido}\n" +
-                        $"Edad: {usuario.Edad}\n" +
-                        $"Fecha de Nacimiento: {usuario.FechaDeNacimiento}\n" +
-                        $"Email: {usuario.Email}\n" +
-                        $"Rol: {usuario.Rol}");
+                bool exito = usuario.AltaDeUsuario(usuario1);
 
-                    } else
-                    {
-                        MessageBox.Show($"DATOS GUARDADOS:\n" +
-                        $"Nombre: {usuario.Nombre}\n" +
-                        $"Apellido: {usuario.Apellido}\n" +
-                        $"Edad: {usuario.Edad}\n" +
-                        $"Fecha de Nacimiento: {usuario.FechaDeNacimiento}\n" +
-                        $"Email: {usuario.Email}\n" +
-                        $"Teléfono: {usuario.Telefono}\n" +
-                        $"Rol: {usuario.Rol}");
-                    }*/
+                if (exito)
+                    MessageBox.Show("Alta de usuario exitosa.");
+                else
+                    MessageBox.Show("No se dio de alta el usuario.");
 
-                }
 
             }
             catch (Exception ex)
@@ -105,7 +88,7 @@ namespace EjercicioClase1.Formularios
                 labelTel.Enabled = true;
                 labelTel.Visible = true;
             }
-            else 
+            else
             {
                 txtTelefono.Enabled = false;
                 txtTelefono.Visible = false;

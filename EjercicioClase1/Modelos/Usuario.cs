@@ -111,5 +111,44 @@ namespace EjercicioClase1.Modelos
 
             return persona;
         }
+
+        public bool AltaDeUsuario(Usuario usuario)
+        {
+            ConexionDataBase conexionDataBase = new ConexionDataBase();
+            string conexion = conexionDataBase.ConnectionString();
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("INSERT INTO Personas (Nombre, Apellido, Edad, FechaDeNacimiento, Email, Telefono, IdRol)");
+            stringBuilder.Append("VALUES (@Nombre, @Apellido, @Edad, @FechaDeNacimiento, @Email, @Telefono, @IdRol)");
+            string consulta = stringBuilder.ToString();
+
+            bool existoso = false;
+
+            try
+            {
+                using (SqlConnection sqlConnection = new SqlConnection(conexion))
+                {
+                    sqlConnection.Open();
+                    using (SqlCommand sqlCommand = new SqlCommand(consulta, sqlConnection))
+                    {
+                        sqlCommand.Parameters.AddWithValue("@Nombre", usuario.Nombre);
+                        sqlCommand.Parameters.AddWithValue("@Apellido", usuario.Apellido);
+                        sqlCommand.Parameters.AddWithValue("@Edad", usuario.Edad);
+                        sqlCommand.Parameters.AddWithValue("@FechaDeNacimiento", usuario.FechaDeNacimiento);
+                        sqlCommand.Parameters.AddWithValue("@Email", usuario.Email);
+                        sqlCommand.Parameters.AddWithValue("@Telefono", usuario.Telefono);
+                        sqlCommand.Parameters.AddWithValue("@IdRol", usuario.IdRol);
+                        sqlCommand.ExecuteNonQuery();
+                    }
+                }
+                existoso = true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return existoso;
+
+        }
     }
 }

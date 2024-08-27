@@ -1,6 +1,6 @@
 ﻿namespace EjercicioClase1.Formularios
 {
-    partial class VentanaPrincipal
+    partial class Alta
     {
         /// <summary>
         /// Required designer variable.
